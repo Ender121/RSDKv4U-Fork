@@ -426,6 +426,9 @@ void RetroEngine::Init()
 #endif
         gameType = GAME_SONIC1;
     }
+    if (strstr(gameWindowText, "Sonic CD")) {
+        gameType = GAME_SONICCD;
+    }
 #endif
 
 #if !RETRO_USE_ORIGINAL_CODE
@@ -473,6 +476,20 @@ void RetroEngine::Init()
         AddAchievement("Metropolis Master", "Complete Any Metropolis\rZone Act without getting\rhurt");
         AddAchievement("Scrambled Egg", "Defeat Dr. Eggman's Boss\rAttack mode in under 7\rminutes");
         AddAchievement("Beat the Clock", "Complete the Time Attack\rmode in less than 45\rminutes");
+    }
+    else if (Engine.gameType == GAME_SONICCD) {
+        AddAchievement("88 Miles Per Hour", "Travel through time");
+        AddAchievement("Just One Hug Is Enough", "Get a hug from Amy");
+        AddAchievement("Paradise Found", "Complete a Zone in the Good Future");
+        AddAchievement("Take the High Road", "Pass the upper Signpost in\rCollision Chaos Zone 2");
+        AddAchievement("King of the Rings", "Collect 200 Rings");
+        AddAchievement("Statue Savior", "Find the angel statue in\rWacky Workbench");
+        AddAchievement("Heavy Metal", "Defeat Metal Sonic without\rgetting hurt");
+        AddAchievement("All Stages Clear!", "Finish the game");
+        AddAchievement("Treasure Hunter", "Collect all the Time Stones");
+        AddAchievement("Dr. Eggman Got Served", "Destroy Dr. Eggman’s\rfinal machine");
+        AddAchievement("Just in Time!", "Complete the Time Attack\rmode in under 25\rminutes");
+        AddAchievement("Savior of the Planet", "Destroy all the robot\rtransporters and Metal\rSonic holograms in the past");
     }
 
     if (skipStart)
