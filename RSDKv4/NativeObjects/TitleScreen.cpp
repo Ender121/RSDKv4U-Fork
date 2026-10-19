@@ -120,7 +120,28 @@ void TitleScreen_Create(void *objPtr)
     self->introTextureID = LoadTexture("Data/Game/Menu/Intro.png", TEXFMT_RGBA5551);
 
     int package = 0;
+    if (Engine.gameType == GAME_SONICCD) {
     switch (Engine.globalBoxRegion) {
+        case REGION_JP:
+            package         = LoadTexture("Data/Game/Models/Package_JP.png", TEXFMT_RGBA5551);
+            self->introMesh = LoadMesh("Data/Game/Models/Intro.bin", self->introTextureID);
+            self->boxMesh   = LoadMesh("Data/Game/Models/JPBox.bin", package);
+            self->cartMesh  = LoadMesh("Data/Game/Models/MegaCDMedia.bin", package);
+            break;
+        case REGION_US:
+            package         = LoadTexture("Data/Game/Models/Package_US.png", TEXFMT_RGBA5551);
+            self->introMesh = LoadMesh("Data/Game/Models/Intro.bin", self->introTextureID);
+            self->boxMesh   = LoadMesh("Data/Game/Models/Box.bin", package);
+            self->cartMesh  = LoadMesh("Data/Game/Models/MegaCDMedia.bin", package);
+            break;
+        case REGION_EU:
+            package         = LoadTexture("Data/Game/Models/DiscJP.png", TEXFMT_RGBA5551);
+            self->introMesh = LoadMesh("Data/Game/Models/Intro.bin", self->introTextureID);
+            self->boxMesh   = LoadMesh("Data/Game/Models/Box.bin", package);
+            self->cartMesh  = LoadMesh("Data/Game/Models/MegaCDMedia.bin", package);
+            break;
+    }
+    else {
         case REGION_JP:
             package         = LoadTexture("Data/Game/Models/Package_JP.png", TEXFMT_RGBA5551);
             self->introMesh = LoadMesh("Data/Game/Models/Intro.bin", self->introTextureID);
