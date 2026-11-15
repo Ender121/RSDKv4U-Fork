@@ -1541,19 +1541,25 @@ void SetPlayerScreenPosition(Entity *target)
         }
     }
 
-    // TBAS (Sonic 1 style ROM) horizontal camera, from ScrollHoriz @0x58AC:
-    // dead zone is 16px wide, from 16px left of the screen center up to the center, max 16px/frame
     int xPosDif = targetX - cameraXPos;
-    if (xPosDif > 0) {
-        if (xPosDif > 16)
-            xPosDif = 16;
+    if (targetX > cameraXPos) {
+        xPosDif -= 8;
+        if (xPosDif >= 0) {
+            if (xPosDif >= 17)
+                xPosDif = 16;
+        }
+        else {
+            xPosDif = 0;
+        }
     }
     else {
-        xPosDif += 16;
-        if (xPosDif > 0)
+        xPosDif += 8;
+        if (xPosDif > 0) {
             xPosDif = 0;
-        else if (xPosDif < -16)
+        }
+        else if (xPosDif <= -17) {
             xPosDif = -16;
+        }
     }
 
     int centeredXBound1 = cameraXPos + xPosDif;
@@ -1600,7 +1606,7 @@ void SetPlayerScreenPosition(Entity *target)
         if (targetY - cameraYPos <= 0) {
             if (yPosDif >= -32 && abs(target->yvel) <= 0x60000) {
                 if (yPosDif < -6) {
-                    yPosDif = -9; // ROM: 0x900 (ScrollVertical @0x5910)
+                    yPosDif = -6;
                 }
             }
             else if (yPosDif < -16) {
@@ -1631,7 +1637,7 @@ void SetPlayerScreenPosition(Entity *target)
                 cameraLockedY = true;
             }
             else {
-                yPosDif = 9; // ROM: 0x900
+                yPosDif = 6;
             }
         }
     }
